@@ -352,7 +352,11 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
 
           <label className={styles.label}>Pilih Waktu / Slot Jam</label>
           {isTimeLoading ? (
-            <div style={{ textAlign: 'center', padding: '1rem', color: 'var(--color-text-muted)' }}>Mengecek ketersediaan slot...</div>
+            <div className={styles.slotsGrid}>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="skeleton" style={{ height: '38px', borderRadius: '8px' }} />
+              ))}
+            </div>
           ) : slots.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '1rem', color: 'red', fontSize: '0.9rem' }}>Barber tidak tersedia pada tanggal ini. Silakan pilih tanggal lain atau barber lain.</div>
           ) : (
