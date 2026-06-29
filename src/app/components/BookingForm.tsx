@@ -228,7 +228,17 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
       // Jalankan Midtrans Snap Popup
       if (typeof window !== 'undefined' && (window as any).snap) {
         (window as any).snap.pay(data.snapToken, {
-          onSuccess: function (result: any) {
+          onSuccess: async function (result: any) {
+            try {
+              // Konfirmasi pembayaran langsung ke backend lokal (berguna untuk testing di localhost)
+              await fetch('/api/booking/confirm', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bookingId: data.bookingId })
+              });
+            } catch (err) {
+              console.error('Failed to confirm booking client-side:', err);
+            }
             window.location.href = `/booking/${data.bookingId}?status=success`;
           },
           onPending: function (result: any) {

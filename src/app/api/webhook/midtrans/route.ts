@@ -61,7 +61,16 @@ export async function POST(request: Request) {
       console.error('Failed to update payment status:', payUpdateErr);
     }
 
-    // 2. Update status booking di tabel bookings
+    // 2. Ambil status booking saat ini untuk mencegah pengiriman notifikasi ganda
+    const { data: currentBooking } = await supabase
+      .from('bookings')
+      .select('status')
+      .eq('id', orderId)
+      .single();
+
+    const isAlreadyPaid = currentBooking?.status === 'paid';
+
+    // 3. Update status booking di tabel bookings
     const { error: bookingUpdateErr } = await supabase
       .from('bookings')
       .update({ status: bookingStatus })
@@ -71,8 +80,8 @@ export async function POST(request: Request) {
       console.error('Failed to update booking status:', bookingUpdateErr);
     }
 
-    // 3. Kirim notifikasi otomatis jika status booking lunas (paid)
-    if (bookingStatus === 'paid') {
+    // 4. Kirim notifikasi otomatis jika status booking lunas (paid) dan belum pernah dibayar sebelumnya
+    if (bookingStatus === 'paid' && !isAlreadyPaid) {
       try {
         const { data: bookingDetails, error: fetchErr } = await supabase
           .from('bookings')
