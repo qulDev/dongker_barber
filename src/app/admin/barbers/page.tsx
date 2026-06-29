@@ -5,11 +5,21 @@ import { createClient } from '@/utils/supabase/client';
 const supabase = createClient();
 import styles from '../admin.module.css';
 import Link from 'next/link';
-import { ChevronLeft, Scissors, Calendar, ClipboardList, Plus, RefreshCw, Trash2, Edit, Users, Star } from 'lucide-react';
+import { ChevronLeft, Scissors, Calendar, ClipboardList, Plus, RefreshCw, Trash2, Edit, Users, Star, LogOut } from 'lucide-react';
 
 export default function BarbersCRUD() {
   const [barbers, setBarbers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const handleLogout = async () => {
+    if (!confirm('Apakah Anda yakin ingin keluar?')) return;
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert('Gagal logout: ' + error.message);
+    } else {
+      window.location.href = '/admin/login';
+    }
+  };
   const [submitting, setSubmitting] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -158,6 +168,13 @@ export default function BarbersCRUD() {
 
       <div className={styles.header}>
         <h1 className={styles.title}>Panel Admin Dongker Barber</h1>
+        <button 
+          onClick={handleLogout} 
+          className={styles.btnLogout}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+        >
+          <LogOut size={16} /> Keluar
+        </button>
       </div>
 
       {/* Navigasi Sub-Admin */}

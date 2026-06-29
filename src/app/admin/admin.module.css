@@ -103,6 +103,11 @@
   transition: var(--transition-smooth);
 }
 
+.select option {
+  background-color: #121212;
+  color: var(--color-text-light);
+}
+
 .input:focus, .textarea:focus, .select:focus {
   border-color: var(--color-cta);
   background: rgba(255, 255, 255, 0.06);
@@ -228,4 +233,22 @@
 
 .homeLink:hover {
   color: var(--color-cta);
+}
+
+.btnLogout {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btnLogout:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ff6b6b;
+  border-color: rgba(239, 68, 68, 0.4);
 }

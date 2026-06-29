@@ -160,25 +160,25 @@ export default function Home() {
         <div className={styles.bentoGrid}>
           {/* Bento 1: Classic Fade */}
           <div className={styles.bentoCard}>
-            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=400" alt="Classic Fade Cut" className={styles.bentoImg} />
+            <img src="/assets/classic fade.jpg" alt="Classic Fade Cut" className={styles.bentoImg} style={{ objectPosition: 'center 10%' }} />
             <span className={styles.bentoOverlayText}>Classic Fade</span>
           </div>
 
           {/* Bento 2: Textured Crop */}
           <div className={styles.bentoCard}>
-            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=400" alt="Textured Crop" className={styles.bentoImg} />
+            <img src="/assets/texture crop.jpg" alt="Textured Crop" className={styles.bentoImg} style={{ objectPosition: 'center 10%' }} />
             <span className={styles.bentoOverlayText}>Textured Crop</span>
           </div>
 
           {/* Bento 3: Modern Pompadour */}
           <div className={styles.bentoCard}>
-            <img src="https://images.unsplash.com/photo-1605497746444-ac9dbd324ce8?q=80&w=400" alt="Pompadour Styling" className={styles.bentoImg} />
+            <img src="/assets/pompadour.jpg" alt="Pompadour Styling" className={styles.bentoImg} style={{ objectPosition: 'center 10%' }} />
             <span className={styles.bentoOverlayText}>Pompadour</span>
           </div>
 
           {/* Bento 4: Beard Grooming */}
           <div className={styles.bentoCard}>
-            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=400" alt="Beard Grooming" className={styles.bentoImg} />
+            <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?q=80&w=400" alt="Beard Grooming" className={styles.bentoImg} style={{ objectPosition: 'center 30%' }} />
             <span className={styles.bentoOverlayText}>Beard Grooming</span>
           </div>
 
@@ -189,7 +189,7 @@ export default function Home() {
 
           {/* Bento 6: Side Part Classic */}
           <div className={styles.bentoCard}>
-            <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?q=80&w=400" alt="Side Part Classic" className={styles.bentoImg} />
+            <img src="/assets/side part.jpg" alt="Side Part Classic" className={styles.bentoImg} style={{ objectPosition: 'center 15%' }} />
             <span className={styles.bentoOverlayText}>Side Part</span>
           </div>
         </div>
