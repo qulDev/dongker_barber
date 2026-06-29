@@ -56,4 +56,4 @@ Menyimpan semua reservasi dari pelanggan dan status pelunasannya.
 ## 2. Row-Level Security (RLS)
 Supabase RLS diaktifkan di seluruh tabel untuk mengamankan data transaksi:
 *   **Akses Publik (Anonim)**: Pelanggan umum dapat membaca (`SELECT`) daftar layanan, daftar barber master, jam kerja/jadwal yang tersedia, serta membuat data pemesanan baru (`INSERT`).
-*   **Akses Admin (Terkonfirmasi)**: Tindakan mengubah data, menghapus, atau memperbarui detail layanan, barber, dan jadwal kerja dibatasi hanya untuk user admin yang login ke sistem (`authenticated`). Kebijakan lengkap dapat ditinjau pada file migrasi [`rls_policies.sql`](file:///c:/DEV/JOKI/docker_mc/dongker_barber/rls_policies.sql).
+*   **Akses Admin (Terkonfirmasi)**: Tindakan mengubah data, menghapus, atau memperbarui detail layanan, barber, dan jadwal kerja dibatasi hanya untuk user admin yang login ke sistem (`authenticated`). Kebijakan lengkap dapat ditinjau pada file migrasi [`rls_policies.sql`](../../rls_policies.sql).

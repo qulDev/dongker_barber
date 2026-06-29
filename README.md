@@ -76,7 +76,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Detailed Technical Guides
 For deep dives on specific subsystems, please check:
-*   [Installation & Setup](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/installation.md)
-*   [Database Schema & RLS Policies](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/database.md)
-*   [Payment Gateway Integration & Ngrok Webhooks](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/payment_gateway.md)
-*   [Notifications Integration (Email & WhatsApp)](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/notifications.md)
+*   [Installation & Setup](documentation/installation.md)
+*   [Database Schema & RLS Policies](documentation/database.md)
+*   [Payment Gateway Integration & Ngrok Webhooks](documentation/payment_gateway.md)
+*   [Notifications Integration (Email & WhatsApp)](documentation/notifications.md)

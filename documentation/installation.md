@@ -39,7 +39,7 @@ RESEND_API_KEY=re_your_resend_email_key
 
 ### 4. Create and Seed Database Tables
 1. Open your Supabase SQL Editor.
-2. Run the RLS policy migrations provided in [`rls_policies.sql`](file:///c:/DEV/JOKI/docker_mc/dongker_barber/rls_policies.sql).
+2. Run the RLS policy migrations provided in [`rls_policies.sql`](../rls_policies.sql).
 3. Populate database seeds and create the default admin credentials by running the following script:
 ```bash
 bun run seed_users.ts

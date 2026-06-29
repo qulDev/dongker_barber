@@ -39,7 +39,7 @@ RESEND_API_KEY=re_kunci_api_resend_anda
 
 ### 4. Setup Database & Seeder Kredensial Admin
 1. Buka SQL Editor di dasbor Supabase Anda.
-2. Jalankan skrip kebijakan keamanan RLS di file [`rls_policies.sql`](file:///c:/DEV/JOKI/docker_mc/dongker_barber/rls_policies.sql).
+2. Jalankan skrip kebijakan keamanan RLS di file [`rls_policies.sql`](../../rls_policies.sql).
 3. Jalankan script seeder lokal untuk mendaftarkan akun admin pertama Anda di database:
 ```bash
 bun run seed_users.ts

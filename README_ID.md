@@ -76,7 +76,7 @@ Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
 ## Dokumen Panduan Teknis Lengkap (Bahasa Indonesia)
 Untuk penjelasan lebih detail mengenai subsistem proyek, silakan tinjau panduan berikut:
-*   [Panduan Instalasi & Setup Lokal](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/id/installation.md)
-*   [Skema Database & Kebijakan RLS](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/id/database.md)
-*   [Integrasi Midtrans & Webhook Ngrok](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/id/payment_gateway.md)
-*   [Integrasi Layanan Notifikasi (Email & WhatsApp)](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/id/notifications.md)
+*   [Panduan Instalasi & Setup Lokal](documentation/id/installation.md)
+*   [Skema Database & Kebijakan RLS](documentation/id/database.md)
+*   [Integrasi Midtrans & Webhook Ngrok](documentation/id/payment_gateway.md)
+*   [Integrasi Layanan Notifikasi (Email & WhatsApp)](documentation/id/notifications.md)
