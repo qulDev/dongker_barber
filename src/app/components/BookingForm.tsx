@@ -77,28 +77,7 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
           return;
         }
 
-        // 3. Generate slot waktu per 30 menit berdasarkan jam buka/tutup
-        const availableSlots: string[] = [];
-        const startStr = activeSchedule.start_time; // format "HH:MM:SS"
-        const endStr = activeSchedule.end_time;
-
-        const [startH, startM] = startStr.split(':').map(Number);
-        const [endH, endM] = endStr.split(':').map(Number);
-
-        let current = new Date();
-        current.setHours(startH, startM, 0, 0);
-
-        const endTimeLimit = new Date();
-        endTimeLimit.setHours(endH, endM, 0, 0);
-
-        while (current < endTimeLimit) {
-          const hh = String(current.getHours()).padStart(2, '0');
-          const mm = String(current.getMinutes()).padStart(2, '0');
-          availableSlots.push(`${hh}:${mm}`);
-          current.setMinutes(current.getMinutes() + 30);
-        }
-
-        // 4. Petakan slot yang sudah terisi (booked)
+        // 3. Petakan slot yang sudah terisi (booked) dari database
         const bookedTimes: string[] = [];
         bookings?.forEach(b => {
           // start_time dan end_time format "HH:MM:SS"
@@ -119,6 +98,72 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
           }
         });
 
+        // 4. Generate slot waktu per 30 menit & saring berdasarkan waktu lampau dan tabrakan durasi
+        const availableSlots: string[] = [];
+        const startStr = activeSchedule.start_time; // format "HH:MM:SS"
+        const endStr = activeSchedule.end_time;
+
+        const [startH, startM] = startStr.split(':').map(Number);
+        const [endH, endM] = endStr.split(':').map(Number);
+
+        let current = new Date();
+        current.setHours(startH, startM, 0, 0);
+
+        const endTimeLimit = new Date();
+        endTimeLimit.setHours(endH, endM, 0, 0);
+
+        const now = new Date();
+        const isToday = selectedDate === now.toLocaleDateString('sv').substring(0, 10);
+
+        while (current < endTimeLimit) {
+          const hh = String(current.getHours()).padStart(2, '0');
+          const mm = String(current.getMinutes()).padStart(2, '0');
+          const slotStr = `${hh}:${mm}`;
+
+          let isValid = true;
+
+          // Proteksi 1: Cek apakah slot sudah terlewati di hari yang sama
+          if (isToday) {
+            const slotDateTime = new Date(now);
+            slotDateTime.setHours(current.getHours(), current.getMinutes(), 0, 0);
+            if (slotDateTime <= now) {
+              isValid = false;
+            }
+          }
+
+          // Proteksi 2 & 3: Cek apakah durasi layanan bentrok dengan jam tutup atau booking lain
+          if (isValid && selectedService) {
+            const slotStart = new Date();
+            slotStart.setHours(current.getHours(), current.getMinutes(), 0, 0);
+
+            const slotEnd = new Date(slotStart);
+            slotEnd.setMinutes(slotEnd.getMinutes() + selectedService.duration_minutes);
+
+            if (slotEnd > endTimeLimit) {
+              isValid = false;
+            } else {
+              let checkOverlap = new Date(slotStart);
+              while (checkOverlap < slotEnd) {
+                const cHh = String(checkOverlap.getHours()).padStart(2, '0');
+                const cMm = String(checkOverlap.getMinutes()).padStart(2, '0');
+                const cStr = `${cHh}:${cMm}`;
+
+                if (bookedTimes.includes(cStr)) {
+                  isValid = false;
+                  break;
+                }
+                checkOverlap.setMinutes(checkOverlap.getMinutes() + 30);
+              }
+            }
+          }
+
+          if (isValid) {
+            availableSlots.push(slotStr);
+          }
+
+          current.setMinutes(current.getMinutes() + 30);
+        }
+
         setSlots(availableSlots);
         setBookedSlots(bookedTimes);
       } catch (err) {
@@ -129,7 +174,7 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
     }
 
     checkAvailability();
-  }, [selectedBarber, selectedDate]);
+  }, [selectedBarber, selectedDate, selectedService]);
 
   const handleNext = () => {
     if (step < 4) setStep(step + 1);
