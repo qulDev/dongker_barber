@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { sendWhatsAppNotification, sendEmailNotification } from '@/utils/notifications';
 const midtransClient = require('midtrans-client');
 
 // Inisialisasi API client Midtrans untuk verifikasi notifikasi
@@ -68,6 +69,33 @@ export async function POST(request: Request) {
 
     if (bookingUpdateErr) {
       console.error('Failed to update booking status:', bookingUpdateErr);
+    }
+
+    // 3. Kirim notifikasi otomatis jika status booking lunas (paid)
+    if (bookingStatus === 'paid') {
+      try {
+        const { data: bookingDetails, error: fetchErr } = await supabase
+          .from('bookings')
+          .select(`
+            *,
+            services:service_id (name, duration_minutes),
+            barbers:barber_id (name)
+          `)
+          .eq('id', orderId)
+          .single();
+
+        if (fetchErr) {
+          console.error('Failed to fetch booking details for notifications:', fetchErr);
+        } else if (bookingDetails) {
+          // Trigger notifikasi secara paralel (asinkronus)
+          Promise.all([
+            sendWhatsAppNotification(bookingDetails),
+            sendEmailNotification(bookingDetails)
+          ]).catch(err => console.error('Notification promise error:', err));
+        }
+      } catch (notifyErr) {
+        console.error('Notification dispatch error:', notifyErr);
+      }
     }
 
     return NextResponse.json({ success: true, message: 'Status updated successfully' });
