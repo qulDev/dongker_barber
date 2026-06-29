@@ -42,6 +42,28 @@ export default function BookingDetailPage({ params }: PageProps) {
     }
 
     fetchBookingDetails();
+
+    // Berlangganan ke perubahan status secara real-time
+    const channel = supabase
+      .channel(`realtime-booking-${bookingId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'bookings',
+          filter: `id=eq.${bookingId}`
+        },
+        (payload) => {
+          console.log('Realtime status update received:', payload.new.status);
+          setBooking((prev: any) => prev ? { ...prev, status: payload.new.status } : null);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [bookingId]);
 
   const formatRupiah = (number: number) => {
