@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 const supabase = createClient();
 import styles from '../admin.module.css';
 import Link from 'next/link';
-import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, Edit } from 'lucide-react';
+import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, Edit, ClipboardList } from 'lucide-react';
 
 export default function ServicesCRUD() {
   const [services, setServices] = useState<any[]>([]);
@@ -146,6 +146,9 @@ export default function ServicesCRUD() {
         </Link>
         <Link href="/admin/schedule" className={styles.navLink}>
           <Calendar size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Kelola Jadwal Barber
+        </Link>
+        <Link href="/admin/bookings" className={styles.navLink}>
+          <ClipboardList size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Daftar Booking
         </Link>
       </div>
 

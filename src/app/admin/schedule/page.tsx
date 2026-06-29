@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 const supabase = createClient();
 import styles from '../admin.module.css';
 import Link from 'next/link';
-import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, ShieldAlert } from 'lucide-react';
+import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, ShieldAlert, ClipboardList } from 'lucide-react';
 
 export default function BarberSchedule() {
   const [barbers, setBarbers] = useState<any[]>([]);
@@ -143,6 +143,9 @@ export default function BarberSchedule() {
         </Link>
         <Link href="/admin/schedule" className={`${styles.navLink} ${styles.activeNav}`}>
           <Calendar size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Kelola Jadwal Barber
+        </Link>
+        <Link href="/admin/bookings" className={styles.navLink}>
+          <ClipboardList size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Daftar Booking
         </Link>
       </div>
 
