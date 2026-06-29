@@ -224,7 +224,46 @@ export default function BookingsMonitoring() {
         <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1.5rem' }}>Antrean Reservasi Pelanggan</h2>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)' }}>Memuat data antrean...</div>
+          <div className={styles.tableWrapper}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Pelanggan</th>
+                  <th>Layanan & Barber</th>
+                  <th>Tanggal & Jam</th>
+                  <th>Status</th>
+                  <th style={{ textAlign: 'center' }}>Ubah Status Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[1, 2, 3].map((i) => (
+                  <tr key={i}>
+                    <td>
+                      <div className="skeleton" style={{ width: '120px', height: '1rem', marginBottom: '0.4rem' }} />
+                      <div className="skeleton" style={{ width: '90px', height: '0.8rem', marginBottom: '0.3rem' }} />
+                      <div className="skeleton" style={{ width: '150px', height: '0.8rem' }} />
+                    </td>
+                    <td>
+                      <div className="skeleton" style={{ width: '100px', height: '1rem', marginBottom: '0.4rem' }} />
+                      <div className="skeleton" style={{ width: '120px', height: '0.8rem' }} />
+                    </td>
+                    <td>
+                      <div className="skeleton" style={{ width: '100px', height: '1rem', marginBottom: '0.4rem' }} />
+                      <div className="skeleton" style={{ width: '130px', height: '0.8rem' }} />
+                    </td>
+                    <td>
+                      <div className="skeleton" style={{ width: '65px', height: '1.25rem', borderRadius: '4px' }} />
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div className="skeleton" style={{ width: '100px', height: '36px', borderRadius: '6px' }} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : bookings.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--color-text-muted)' }}>Tidak ada data reservasi yang cocok dengan filter.</div>
         ) : (

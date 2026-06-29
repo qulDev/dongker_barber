@@ -297,7 +297,44 @@ export default function BarbersCRUD() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>Memuat data...</div>
+            <div className={styles.tableWrapper}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>Nama & Spesialisasi</th>
+                    <th>Rating</th>
+                    <th>Status</th>
+                    <th style={{ width: '100px' }}>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[1, 2, 3].map((i) => (
+                    <tr key={i}>
+                      <td>
+                        <div className="skeleton" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '110px', height: '1rem', marginBottom: '0.4rem' }} />
+                        <div className="skeleton" style={{ width: '160px', height: '0.8rem' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '45px', height: '1rem' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '55px', height: '1rem', borderRadius: '4px' }} />
+                      </td>
+                      <td>
+                        <div className={styles.actionCell} style={{ gap: '0.5rem' }}>
+                          <div className="skeleton" style={{ width: '32px', height: '28px', borderRadius: '6px' }} />
+                          <div className="skeleton" style={{ width: '32px', height: '28px', borderRadius: '6px' }} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : barbers.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>Belum ada data barber.</div>
           ) : (

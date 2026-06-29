@@ -304,7 +304,40 @@ export default function ServicesCRUD() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>Memuat data...</div>
+            <div className={styles.tableWrapper}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Layanan</th>
+                    <th>Harga</th>
+                    <th>Durasi</th>
+                    <th style={{ textAlign: 'center' }}>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[1, 2, 3].map((i) => (
+                    <tr key={i}>
+                      <td>
+                        <div className="skeleton" style={{ width: '120px', height: '1rem', marginBottom: '0.5rem' }} />
+                        <div className="skeleton" style={{ width: '200px', height: '0.8rem' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '70px', height: '1rem' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '60px', height: '1rem' }} />
+                      </td>
+                      <td>
+                        <div className={styles.actionCell} style={{ justifyContent: 'center', gap: '0.5rem' }}>
+                          <div className="skeleton" style={{ width: '32px', height: '28px', borderRadius: '6px' }} />
+                          <div className="skeleton" style={{ width: '32px', height: '28px', borderRadius: '6px' }} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : services.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>Belum ada layanan yang ditambahkan.</div>
           ) : (

@@ -295,7 +295,39 @@ export default function BarberSchedule() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>Memuat jadwal...</div>
+            <div className={styles.tableWrapper}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Tipe Jadwal</th>
+                    <th>Detail Waktu / Hari</th>
+                    <th>Status</th>
+                    <th style={{ textAlign: 'center' }}>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[1, 2, 3].map((i) => (
+                    <tr key={i}>
+                      <td>
+                        <div className="skeleton" style={{ width: '90px', height: '1rem' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '120px', height: '1rem', marginBottom: '0.4rem' }} />
+                        <div className="skeleton" style={{ width: '140px', height: '0.8rem' }} />
+                      </td>
+                      <td>
+                        <div className="skeleton" style={{ width: '65px', height: '1rem', borderRadius: '4px' }} />
+                      </td>
+                      <td>
+                        <div className={styles.actionCell} style={{ justifyContent: 'center' }}>
+                          <div className="skeleton" style={{ width: '32px', height: '28px', borderRadius: '6px' }} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : schedules.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>Jadwal belum disetel. Barber akan menggunakan pengaturan default.</div>
           ) : (
