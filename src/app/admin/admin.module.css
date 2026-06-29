@@ -1,0 +1,231 @@
+.adminContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 3rem;
+}
+
+/* Navigasi Admin */
+.adminNav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 1rem;
+}
+
+.navLink {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.navLink:hover {
+  color: var(--color-cta);
+  background: rgba(202, 138, 4, 0.05);
+}
+
+.activeNav {
+  color: var(--color-cta) !important;
+  background: rgba(202, 138, 4, 0.1) !important;
+  border: 1px solid rgba(202, 138, 4, 0.2);
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FAFAF9, #CA8A04);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Grid Layout Dashboard */
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .dashboardGrid {
+    grid-template-columns: 380px 1fr;
+  }
+}
+
+/* Form Styles */
+.formCard {
+  padding: 2rem;
+  height: fit-content;
+}
+
+.formTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.75rem;
+  color: var(--color-cta);
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.input, .textarea, .select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--color-text-light);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  border-color: var(--color-cta);
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+.btnSubmit {
+  width: 100%;
+  background: var(--color-cta);
+  color: var(--color-bg);
+  border: none;
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  margin-top: 0.5rem;
+}
+
+.btnSubmit:hover {
+  background: var(--color-cta-hover);
+}
+
+.btnCancel {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  margin-top: 0.5rem;
+}
+
+.btnCancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* List / Table Styles */
+.listCard {
+  padding: 2rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: 1rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 0.95rem;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.actionCell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btnEdit {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #60A5FA;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btnEdit:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.btnDelete {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btnDelete:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Home Link */
+.homeLink {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.homeLink:hover {
+  color: var(--color-cta);
+}
