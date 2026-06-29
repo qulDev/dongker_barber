@@ -99,8 +99,32 @@ export default function BookingDetailPage({ params }: PageProps) {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', flexDirection: 'column', gap: '1rem', color: 'var(--color-text-muted)' }}>
-        Memuat detail reservasi...
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: '2rem 1.5rem' }}>
+        <div className="glass-card" style={{ width: '100%', maxWidth: '580px', padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          {/* Status Badge Skeleton */}
+          <div className="skeleton" style={{ width: '220px', height: '40px', borderRadius: '50px', marginBottom: '2rem' }} />
+          
+          {/* Title Skeletons */}
+          <div className="skeleton" style={{ width: '60%', height: '1.75rem', marginBottom: '0.75rem' }} />
+          <div className="skeleton" style={{ width: '40%', height: '0.85rem', marginBottom: '2.5rem' }} />
+
+          {/* Details Card Skeleton */}
+          <div style={{ width: '100%', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '1.5rem', marginBottom: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255, 255, 255, 0.05)', paddingBottom: '0.75rem' }}>
+                <div className="skeleton" style={{ width: '30%', height: '0.9rem' }} />
+                <div className="skeleton" style={{ width: '45%', height: '0.9rem' }} />
+              </div>
+            ))}
+            <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '0.25rem' }}>
+              <div className="skeleton" style={{ width: '25%', height: '1rem' }} />
+              <div className="skeleton" style={{ width: '35%', height: '1.2rem' }} />
+            </div>
+          </div>
+
+          {/* Back Button Skeleton */}
+          <div className="skeleton" style={{ width: '100%', height: '50px', borderRadius: '50px' }} />
+        </div>
       </div>
     );
   }
