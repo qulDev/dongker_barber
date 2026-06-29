@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dongker Barber Website
 
-## Getting Started
+A premium Barbershop Booking & Management platform built with Next.js, Supabase, and Midtrans Sandbox. Features real-time slot scheduling, automated notifications (Resend Email & Fonnte WhatsApp), and an interactive booking workflow.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Technical Stack
+*   **Framework**: Next.js 15+ (App Router)
+*   **Runtime**: Bun
+*   **Database**: Supabase (PostgreSQL with RLS)
+*   **Payment Gateway**: Midtrans (Snap SDK)
+*   **Styling**: Vanilla CSS & CSS Modules (Premium dark-gold theme)
+*   **Notifications**: Resend (Email), Fonnte (WhatsApp)
+*   **State & Realtime**: Supabase Realtime for instant queue sync
+
+---
+
+## Directory Structure
+```text
+├── src/
+│   ├── app/
+│   │   ├── admin/             # Admin Panels (Services, Barbers, Bookings, Schedules)
+│   │   ├── api/               # API Endpoints (checkout, webhook, confirm)
+│   │   ├── booking/           # Customer Booking Detail & Realtime Status page
+│   │   ├── components/        # Global components (BookingForm, Header)
+│   │   └── globals.css        # Global CSS & Design Tokens (Shimmer skeletons)
+│   ├── assets/                # Portfolio assets
+│   ├── lib/                   # Supabase Client configuration
+│   └── utils/                 # Notification utilities (WhatsApp, Email templates)
+├── public/                    # Static assets (portraits, icons)
+├── documentation/             # Technical deep-dive documentation
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quickstart
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Prerequisites
+Ensure you have **Node.js** or **Bun** installed on your system.
 
-## Learn More
+### 2. Install Dependencies
+Clone the repository and install dependencies using Bun:
+```bash
+bun install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Environment Variables
+Create a `.env` file in the root folder with the following keys:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NEXT_PUBLIC_MIDTRANS_CLIENT_KEY=your_midtrans_client_key
+MIDTRANS_SERVER_KEY=your_midtrans_server_key
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+FONNTE_API_TOKEN=your_fonnte_token
+RESEND_API_KEY=your_resend_key
+```
 
-## Deploy on Vercel
+### 4. Database Seeding
+To run database seeds and add initial admin credentials:
+```bash
+bun run seed_users.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Running the Dev Server
+Start the development server locally:
+```bash
+bun dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Detailed Technical Guides
+For deep dives on specific subsystems, please check:
+*   [Installation & Setup](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/installation.md)
+*   [Database Schema & RLS Policies](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/database.md)
+*   [Payment Gateway Integration & Ngrok Webhooks](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/payment_gateway.md)
+*   [Notifications Integration (Email & WhatsApp)](file:///c:/DEV/JOKI/docker_mc/dongker_barber/documentation/notifications.md)
