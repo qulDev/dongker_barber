@@ -5,7 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 const supabase = createClient();
 import styles from '../admin.module.css';
 import Link from 'next/link';
-import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, Edit, ClipboardList } from 'lucide-react';
+import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, Edit, ClipboardList, Users } from 'lucide-react';
 
 export default function ServicesCRUD() {
   const [services, setServices] = useState<any[]>([]);
@@ -73,6 +73,36 @@ export default function ServicesCRUD() {
       if (serviceId === id) handleCancel();
     } catch (err: any) {
       alert(err.message || 'Gagal menghapus layanan.');
+    }
+  };
+
+  const [uploading, setUploading] = useState(false);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+      const filePath = `services/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('assets')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('assets')
+        .getPublicUrl(filePath);
+
+      setImageUrl(publicUrl);
+    } catch (err: any) {
+      alert(err.message || 'Gagal mengunggah gambar.');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -144,6 +174,9 @@ export default function ServicesCRUD() {
         <Link href="/admin/services" className={`${styles.navLink} ${styles.activeNav}`}>
           <Scissors size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Kelola Layanan
         </Link>
+        <Link href="/admin/barbers" className={styles.navLink}>
+          <Users size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Kelola Barber
+        </Link>
         <Link href="/admin/schedule" className={styles.navLink}>
           <Calendar size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} /> Kelola Jadwal Barber
         </Link>
@@ -208,7 +241,21 @@ export default function ServicesCRUD() {
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>URL Gambar Aset (Opsional)</label>
+              <label className={styles.label}>Gambar Layanan / Potongan</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={uploading}
+                style={{ marginBottom: '0.5rem', display: 'block', fontSize: '0.85rem' }}
+              />
+              {uploading && <div style={{ fontSize: '0.8rem', color: 'var(--color-cta)', marginBottom: '0.5rem' }}>Mengunggah gambar...</div>}
+              {imageUrl && (
+                <div style={{ marginBottom: '1rem', width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <img src={imageUrl} alt="Pratinjau" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              )}
+              <label className={styles.label} style={{ fontSize: '0.8rem', opacity: 0.7, marginTop: '0.5rem' }}>Atau Tempel URL Gambar Manual</label>
               <input
                 type="url"
                 placeholder="https://example.com/image.jpg"
