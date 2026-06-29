@@ -234,7 +234,19 @@ export default function Home() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: 'center', color: 'var(--color-text-muted)', padding: '2rem' }}>Memuat daftar harga...</div>
+            <div className={styles.servicesList}>
+              {[1, 2, 3].map((i) => (
+                <div key={i} className={styles.serviceItem} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.03)', paddingBottom: '1.5rem' }}>
+                  <div className={styles.serviceDetails} style={{ width: '70%' }}>
+                    <div className="skeleton" style={{ width: '40%', height: '1.25rem', marginBottom: '0.75rem' }} />
+                    <div className="skeleton" style={{ width: '85%', height: '0.85rem', marginBottom: '0.5rem' }} />
+                    <div className="skeleton" style={{ width: '60%', height: '0.85rem', marginBottom: '0.75rem' }} />
+                    <div className="skeleton" style={{ width: '25%', height: '0.75rem' }} />
+                  </div>
+                  <div className="skeleton" style={{ width: '80px', height: '1.5rem' }} />
+                </div>
+              ))}
+            </div>
           ) : (
             <div className={styles.servicesList}>
               {filteredServices.map(s => (
@@ -261,7 +273,16 @@ export default function Home() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>Memuat data barber...</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="glass-card" style={{ padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className="skeleton" style={{ width: '130px', height: '130px', borderRadius: '50%', margin: '0 auto 1.5rem' }} />
+                <div className="skeleton" style={{ width: '60%', height: '1.35rem', marginBottom: '0.75rem' }} />
+                <div className="skeleton" style={{ width: '80%', height: '0.85rem', marginBottom: '1.25rem' }} />
+                <div className="skeleton" style={{ width: '35%', height: '1rem' }} />
+              </div>
+            ))}
+          </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
             {barbers.map((barber) => (
