@@ -1,22 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
 
 :root {
   --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Syne', sans-serif;
+  --font-display: 'Oswald', sans-serif;
 
-  /* Theme Colors (Stone & Gold Premium) */
-  --color-bg: #0C0A09;          /* Stone 950 */
-  --color-primary: #1C1917;     /* Stone 900 */
-  --color-secondary: #44403C;   /* Stone 700 */
-  --color-cta: #CA8A04;         /* Gold/Brass */
-  --color-cta-hover: #A16207;
-  --color-text-light: #FAFAF9;  /* Stone 50 */
-  --color-text-muted: #A8A29E;  /* Stone 400 */
+  /* Theme Colors (Deep OLED Black & Neon Orange) */
+  --color-bg: #070707;          /* Hitam pekat */
+  --color-primary: #121212;     /* Abu-abu gelap */
+  --color-secondary: #222222;   /* Batas & pemisah */
+  --color-cta: #FF5500;         /* Oranye Neon */
+  --color-cta-hover: #CC4400;
+  --color-text-light: #FAFAF9;  /* Putih tulang */
+  --color-text-muted: #8F8F8F;  /* Muted grey */
 
-  /* Glassmorphism Properties */
-  --glass-bg: rgba(28, 25, 23, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: 16px;
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  /* High-Gloss Glassmorphism Properties */
+  --glass-bg: rgba(18, 18, 18, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-blur: 20px;
+  --glass-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.7);
   
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -33,7 +35,7 @@ body {
   color: var(--color-text-light);
   min-height: 100vh;
   overflow-x: hidden;
-  background-image: radial-gradient(circle at 50% -20%, #44403C 0%, #0C0A09 70%);
+  background-image: radial-gradient(circle at 50% 0%, rgba(255, 85, 0, 0.08) 0%, #070707 70%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -46,13 +48,13 @@ body {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  border-radius: 16px;
+  border-radius: 12px;
   transition: var(--transition-smooth);
 }
 
 .glass-card:hover {
-  border-color: rgba(202, 138, 4, 0.3);
-  box-shadow: 0 12px 40px 0 rgba(202, 138, 4, 0.1), var(--glass-shadow);
+  border-color: rgba(255, 85, 0, 0.3);
+  box-shadow: 0 15px 45px 0 rgba(255, 85, 0, 0.08), var(--glass-shadow);
 }
 
 /* Common Interactive Element Focus Style */

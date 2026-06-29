@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/utils/supabase/client';
+const supabase = createClient();
 import styles from '../admin.module.css';
 import Link from 'next/link';
 import { ChevronLeft, Scissors, Calendar, Plus, RefreshCw, Trash2, ShieldAlert } from 'lucide-react';
