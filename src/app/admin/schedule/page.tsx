@@ -100,22 +100,64 @@ export default function BarberSchedule() {
 
     setSubmitting(true);
     try {
-      const scheduleData = {
-        barber_id: selectedBarberId,
-        start_time: `${startTime}:00`,
-        end_time: `${endTime}:00`,
-        is_available: isAvailable,
-        day_of_week: isSpecificDate ? null : parseInt(dayOfWeek),
-        specific_date: isSpecificDate ? specificDate : null
-      };
-
-      const { error } = await supabase
+      // 1. Cek apakah jadwal untuk hari/tanggal tersebut sudah ada
+      let query = supabase
         .from('schedules')
-        .insert([scheduleData]);
+        .select('id')
+        .eq('barber_id', selectedBarberId);
 
-      if (error) throw error;
+      if (isSpecificDate) {
+        query = query.eq('specific_date', specificDate).is('day_of_week', null);
+      } else {
+        query = query.eq('day_of_week', parseInt(dayOfWeek)).is('specific_date', null);
+      }
 
-      alert('Jadwal berhasil ditambahkan.');
+      const { data: existingSchedules, error: checkError } = await query;
+
+      if (checkError) throw checkError;
+
+      if (existingSchedules && existingSchedules.length > 0) {
+        // Update jadwal yang ada (overwrite)
+        const { error } = await supabase
+          .from('schedules')
+          .update({
+            start_time: `${startTime}:00`,
+            end_time: `${endTime}:00`,
+            is_available: isAvailable
+          })
+          .eq('id', existingSchedules[0].id);
+
+        if (error) throw error;
+
+        // Bersihkan duplikat jika ada lebih dari 1 data di database
+        if (existingSchedules.length > 1) {
+          const duplicateIds = existingSchedules.slice(1).map(s => s.id);
+          await supabase
+            .from('schedules')
+            .delete()
+            .in('id', duplicateIds);
+        }
+
+        alert('Jadwal berhasil diperbarui (di-overwrite).');
+      } else {
+        // Masukkan jadwal baru jika belum ada
+        const scheduleData = {
+          barber_id: selectedBarberId,
+          start_time: `${startTime}:00`,
+          end_time: `${endTime}:00`,
+          is_available: isAvailable,
+          day_of_week: isSpecificDate ? null : parseInt(dayOfWeek),
+          specific_date: isSpecificDate ? specificDate : null
+        };
+
+        const { error } = await supabase
+          .from('schedules')
+          .insert([scheduleData]);
+
+        if (error) throw error;
+
+        alert('Jadwal berhasil ditambahkan.');
+      }
       
       // Reset form
       setSpecificDate('');

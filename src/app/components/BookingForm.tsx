@@ -46,7 +46,8 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
     async function checkAvailability() {
       setIsTimeLoading(true);
       try {
-        const dateObj = new Date(selectedDate);
+        const [year, month, day] = selectedDate.split('-').map(Number);
+        const dateObj = new Date(year, month - 1, day);
         const dayOfWeek = dateObj.getDay(); // 0 = Minggu, 1 = Senin, dst.
 
         // 1. Ambil jadwal barber (rutin mingguan atau override tanggal spesifik)
@@ -63,10 +64,21 @@ export default function BookingForm({ services, barbers, onClose }: BookingFormP
           .eq('booking_date', selectedDate)
           .neq('status', 'cancelled');
 
-        // Cari override khusus tanggal ini
-        const specificSchedule = schedules?.find(s => s.specific_date === selectedDate);
-        // Cari jadwal mingguan rutin untuk hari ini
-        const routineSchedule = schedules?.find(s => s.day_of_week === dayOfWeek && !s.specific_date);
+        // Cari override khusus tanggal ini (urutkan berdasarkan is_available dan end_time terlama)
+        const specificSchedule = schedules
+          ?.filter(s => s.specific_date === selectedDate)
+          .sort((a, b) => {
+            if (a.is_available !== b.is_available) return a.is_available ? -1 : 1;
+            return b.end_time.localeCompare(a.end_time);
+          })[0];
+
+        // Cari jadwal mingguan rutin untuk hari ini (urutkan berdasarkan is_available dan end_time terlama)
+        const routineSchedule = schedules
+          ?.filter(s => s.day_of_week === dayOfWeek && !s.specific_date)
+          .sort((a, b) => {
+            if (a.is_available !== b.is_available) return a.is_available ? -1 : 1;
+            return b.end_time.localeCompare(a.end_time);
+          })[0];
 
         const activeSchedule = specificSchedule || routineSchedule;
 
